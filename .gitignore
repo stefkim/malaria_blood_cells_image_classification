@@ -1,3 +1,2 @@
-web/models/*
 web/__pycache__
-web/static/images/*
+.gitignore
