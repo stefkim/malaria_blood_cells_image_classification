@@ -1,0 +1,14 @@
+.upload{
+    background-color: lightgrey;
+    width: 300px;
+    padding: 50px;
+    margin: 20px;
+}
+
+#browsebutton {
+    background-color: white;
+}
+
+#my-file-selector {
+    display: none;
+}
