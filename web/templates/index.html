@@ -19,14 +19,18 @@
   <link href="static/css/freelancer.min.css" rel="stylesheet">
   <link href="static/css/upload.css" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
 
-   <script type="text/javascript">
 
-       $(window).load(function() {
-    $("#predictionModal").modal("show");
-    });
 
-   </script>
+    {% if show_modal %}
+    <script>
+        $(document).ready(function(){
+            $("#predictionModal").modal();
+        });
+    </script>
+    {% endif %}
+
 </head>
 
 <body id="page-top">
@@ -90,21 +94,20 @@
                     </div>
             {% endif %}
 
-         <button type="submit" class="btn btn-primary btn-lg" id="sbButton">Predict</button>
+         <button type="submit" class="btn btn-primary btn-lg" id="predictBtn">Predict</button>
         </form>
-          <br><br>
-          <img src="{{ result_image }}">
-          <h4>
-              {{result_accuracy}} {{result_class}}
-          </h4>
-
-         <button type="button"
-                    class="btn btn-primary btn-lg"
-                    data-toggle="modal"
-                    data-target="#predictionModal">
-             hasil
-         </button>
-
+{#          <br><br>#}
+{#          <img src="{{ result_image }}">#}
+{#          <h4>#}
+{#              {{result_accuracy}} {{result_class}}#}
+{#          </h4>#}
+{##}
+{#         <button type="button"#}
+{#                    class="btn btn-primary btn-lg"#}
+{#                    data-toggle="modal"#}
+{#                    data-target="#predictionModal">#}
+{#             hasil#}
+{#         </button>#}
       </div>
 
        
