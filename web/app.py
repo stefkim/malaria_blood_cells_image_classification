@@ -3,7 +3,6 @@ from flask import Flask, redirect, url_for, request, render_template
 from pathlib import Path
 from werkzeug.utils import secure_filename
 
-
 from fastai import *
 from fastai.vision import *
 from fastai.callbacks.hooks import *
@@ -42,8 +41,7 @@ def upload_data():
         image = request.files['file']
         if image.filename == '':
             return render_template('index.html',
-                                   err = True
-                                   )
+                                   err = True)
         else:
             img_file = request.files['file']
             img_path = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(img_file.filename))
@@ -51,14 +49,11 @@ def upload_data():
 
             prediction = predict(img_path)
 
-            # return data_path,predict(data_path)
             return render_template('index.html',
                                    result_class=str(prediction[0]),
                                    result_accuracy = '{:.3f}%'.format(float(max(prediction[2]))*100),
                                    result_image = img_path,
                                    show_modal = True)
-            #return str(prediction[0])
-
     return None
 
 if __name__ == '__main__':

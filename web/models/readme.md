@@ -1,1 +1,1 @@
-## folder untuk menyimpan model 
+## put your ```.pth``` file here

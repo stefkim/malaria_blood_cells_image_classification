@@ -1,1 +1,1 @@
-## folder untuk menyimpan foto hasil upload
+## uploaded image will be here

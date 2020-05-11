@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
@@ -19,23 +18,26 @@
   <link href="static/css/freelancer.min.css" rel="stylesheet">
   <link href="static/css/upload.css" rel="stylesheet">
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+  <script src="static/js/jquery-3.5.1.js"></script>
 
 
+  <!--  Modal Prediction Result akan otomatis ditampilkan
+        jika hasil prediksi & parameter show_modal bernilai True -->
 
-    {% if show_modal %}
+   {% if show_modal %}
     <script>
         $(document).ready(function(){
             $("#predictionModal").modal();
         });
     </script>
-    {% endif %}
+   {% endif %}
+
 
 </head>
 
 <body id="page-top">
 
-  <!-- Navigation -->
+  <!-- Navigation Bar -->
   <nav class="navbar navbar-expand-lg bg-secondary fixed-top" id="mainNav">
     <div class="container">
       <a class="navbar-brand js-scroll-trigger" href="#page-top">MD-RN34</a>
@@ -57,28 +59,30 @@
     </div>
   </nav>
 
-
-
-  <!-- Heading Section -->
+  <!-- Prediction Section -->
   <section class="masthead  page-section portfolio" id="home">
     <div class="container">
 
       <!-- Section Heading -->
-      <h2 class="page-section-heading text-center text-secondary mb-0">Malaria Detector using ResNet34</h2>
+      <h2 class="page-section-heading text-center text-secondary mb-0">
+          Malaria Detector using ResNet34
+      </h2>
 
       <!-- Icon Divider -->
       <div class="divider-custom ">
         <div class="divider-custom-line"></div>
       </div> <br><br><br>
 
-      <!-- Portfolio Grid Items -->
+      <!-- Grid Items -->
       <div class="container text-center" >
         <p><b>Browse Blood Smear Image & Click Predict Button</b></p>
-        <!-- UPLOAD FILE -->  
+        <!-- Form Upload File  -->
         <form  action="/" method="POST" enctype="multipart/form-data">
-
            <input type = "file" name = "file" />
             <br><br>
+        <!--
+        Jika file tidak terpilih maka akan muncul error alert
+        -->
             {% if err %}
                 <div class="container">
                     <div class="row">
@@ -96,25 +100,9 @@
 
          <button type="submit" class="btn btn-primary btn-lg" id="predictBtn">Predict</button>
         </form>
-{#          <br><br>#}
-{#          <img src="{{ result_image }}">#}
-{#          <h4>#}
-{#              {{result_accuracy}} {{result_class}}#}
-{#          </h4>#}
-{##}
-{#         <button type="button"#}
-{#                    class="btn btn-primary btn-lg"#}
-{#                    data-toggle="modal"#}
-{#                    data-target="#predictionModal">#}
-{#             hasil#}
-{#         </button>#}
       </div>
 
-       
       </div>
-      <!-- /.row -->
-
-    </div>
   </section>
 
   <!-- About Section -->
@@ -132,20 +120,49 @@
 
       <!-- About Section Content -->
       <div class="row">
-        <div class="col-lg-12 ml-auto">
-          <p class="lead text-center">
-            "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+        <div class="col-md-12 ml-auto">
+        <!-- Penjelasan tentang penyakit malaria dan keadaan di Indonesia-->
+          <p class="lead ">
+            Penyakit malaria merupakan penyakit yang disebabkan oleh parasit <I>Plasmodium</I>
+            yang berasal dari gigitan nyamuk yang masuk ke dalam
+            tubuh manusia dan menyerang sel darah merah manusia
+            yang bisa menyebabkan kematian jika tidak cepat ditangani oleh medis.
+
+            Di Indonesia, jumlah penderita malaria semakin menurun dari tahun ke tahun,
+            akan tetapi di beberapa wilayah Timur Indonesia seperti Papua, Papua Barat, dan NTT
+            masih tergolong rawan terkena penyakit malaria.
+
+            Pemeriksaan medis yang dilakukan untuk mendiagnosa penyakit malaria yaitu
+            melalui pemeriksaan sel darah penderita di bawah mikroskop untuk mendeteksi parasit malaria.
           </p>
+
+         <!-- 2. Tujuan prmbuatan website -->
+          <p class="lead ">
+          Tujuan pembuatan website ini yaitu sebagai alternatif untuk melakukan
+          diagnosa penyakit malaria secara cepat dan akurat
+          menggunakan citra sel darah penderita yang telah ditangkap menggunakan
+          kamera ponsel cerdas berbasis Android yang dilengkapi dengan optik mikroskop maupun perangkat mikroskop digital.
+          </p>
+
+        <!-- 3. Detail algoritma ResNet34 serta hasil pelatihan model yang dipakai di website -->
+          <p class="lead ">
+            Cara pendiagnosaan penyakit malaria yang digunakan dalam website ini yaitu menggunakan
+            algoritma Deep Learning menggunakan arsitektur Residual Neural Networks dengan 34 <i>layer</i>
+            yang telah dilatih menggunakan dataset citra sel darah merah malaria yang telah dikumpulkan oleh peneliti dari
+            Lister Hill National Center for Biomedical Communications (LHNCBC) yang merupakan bagian dari
+            National Library of Medicine (NLM) Amerika Serikat.
+          </p>
+
+          
         </div>
       </div>
 
     </div>
   </section>
 
- <!--  Predict Modal  -->
-
+ <!--  Prediction Result Modal  -->
  <div class="portfolio-modal modal fade" id="predictionModal" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">
-  <div class="modal-dialog modal-xl" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">
@@ -164,10 +181,10 @@
               </div>
               <br>
               <!-- Prediction Modal - Image -->
-              <img class="img-fluid rounded mb-5" style="color: red;" src="{{ result_image }}" alt="">
+              <img class="img-fluid rounded mb-5" style="color: #ff0000;" src="{{ result_image }}" height="200" width="200" alt="Prediction Image">
 
               <!-- Prediction Modal - Text -->
-              <h4 class="text-secondary mb-0">{{ result_accuracy }} {{ result_class }}</h4>
+              <h5 class="text-secondary mb-0">Score : {{ result_accuracy }} {{ result_class }}</h5>
 
             </div>
           </div>
@@ -181,7 +198,7 @@
   <!-- Footer Section -->
   <section class="copyright py-4 text-center text-white">
     <div class="container">
-      <small>Copyright &copy; MD-RN34 2020</small>
+      <small> Malaria Detection ResNet34 @ 2020</small>
     </div>
   </section>
 
@@ -191,7 +208,6 @@
 
   <!-- Plugin JavaScript -->
   <script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
-
 
   <!-- Custom scripts for this template -->
   <script src="static/js/freelancer.min.js"></script>
