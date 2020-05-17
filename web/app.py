@@ -1,22 +1,17 @@
 from flask import Flask, redirect, url_for, request, render_template
-
 from pathlib import Path
 from werkzeug.utils import secure_filename
-
 from fastai import *
 from fastai.vision import *
 from fastai.callbacks.hooks import *
 
 UPLOAD_FOLDER = 'static/images/'
-
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-
 path = Path('')
 classes = ['Parasitized', 'Uninfected']
-data = ImageDataBunch.single_from_classes(path,
-                                          classes,
+data = ImageDataBunch.single_from_classes(path, classes,
                                           ds_tfms=get_transforms(do_flip = True,
                                                                  flip_vert = True,
                                                                  max_warp=0),
@@ -25,7 +20,6 @@ data = ImageDataBunch.single_from_classes(path,
 model = cnn_learner(data,models.resnet34)
 model.load('stage1')
 
-
 def predict(file_path):
     img = open_image(file_path)
     return model.predict(img)
@@ -33,7 +27,6 @@ def predict(file_path):
 @app.route('/')
 def index():
     return render_template('index.html')
-
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_data():
@@ -44,7 +37,8 @@ def upload_data():
                                    err = True)
         else:
             img_file = request.files['file']
-            img_path = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(img_file.filename))
+            img_path = os.path.join(app.config['UPLOAD_FOLDER'], 
+            secure_filename(img_file.filename))
             img_file.save(img_path)
 
             prediction = predict(img_path)
